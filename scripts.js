@@ -4,22 +4,25 @@ const oppKeys = document.querySelectorAll(".operator")
 const equalKey = document.querySelectorAll(".equal-sign")
 const clearKey = document.querySelectorAll('.all-clear')
 
-// function eventListnerAttacher(button){
-// button.addEventListener('click', handleEvent)
-// };
-
-numberKeys.forEach((numberGetter) => numberGetter.addEventListener('click', valueExtrator));
-// oppKeys.forEach(eventListnerAttacher);
-// equalKey.forEach(eventListnerAttacher);
-// clearKey.forEach(eventListnerAttacher);
+const calcInputs = [];
 
 
+numberKeys.forEach((valueGetter) => valueGetter.addEventListener('click', valueExtrator));
+oppKeys.forEach((valueGetter) => valueGetter.addEventListener('click', valueExtrator));
+equalKey.forEach((valueGetter) => valueGetter.addEventListener('click', valueExtrator));
+clearKey.forEach((valueGetter) => valueGetter.addEventListener('click', valueExtrator));
 
-// function numberGetter(numberButton){
-// numberButton.addEventListener('click', valueExtrator)
-// }
+
 
 
 function valueExtrator(e){
     console.log(e.currentTarget.value)
+    const keyPad = e.currentTarget.value;
+    const calcInput = [
+        keyPad
+    ]
+    calcInputs.push(calcInput);
+
 }
+
+console.log(calcInputs)
