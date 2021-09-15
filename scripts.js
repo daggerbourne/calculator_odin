@@ -3,9 +3,11 @@ const numberKeys = document.querySelectorAll(".number");
 const oppKeys = document.querySelectorAll(".operator")
 const equalKey = document.querySelectorAll(".equal-sign")
 const clearKey = document.querySelectorAll('.all-clear')
+const display = document.querySelector('.display')
 
-const calcInputs = [];
+let calcInputs = [];
 let displayValue = ""
+let valueTotal = 0
 
 
 numberKeys.forEach((valueGetter) => valueGetter.addEventListener('click', valueExtrator));
@@ -18,14 +20,30 @@ clearKey.forEach((valueGetter) => valueGetter.addEventListener('click', valueExt
 
 function valueExtrator(e){
 
-  
-    console.log(typeof e.currentTarget.value)
-    const keyPad = e.currentTarget.value;
+    if(e.currentTarget.className === 'number'){
+    console.log(`you clicked a ${e.currentTarget.className}`)
+    // const keyPad = e.currentTarget.value;
     const calcInput = [
-        keyPad
+        e.currentTarget.value
     ]
     calcInputs.push(calcInput);
     displayValue = calcInputs.join('');
+    display.innerHTML = `"\n                <input type=\"text\" class=\"calculator-screen\" value=\"${displayValue}\" disabled=\"\">\n            "`
+    valueTotal = parseInt(displayValue);
+    console.log(valueTotal);
+    }
+
+    if(e.currentTarget.className === 'all-clear'){
+        valueTotal = 0
+        displayValue = "0"
+        display.innerHTML = `"\n                <input type=\"text\" class=\"calculator-screen\" value=\"${displayValue}\" disabled=\"\">\n            "`
+        calcInputs = []
+        console.log(valueTotal)
+    }
+
+
+    
+
 
  }
 
