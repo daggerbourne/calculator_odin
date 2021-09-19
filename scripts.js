@@ -8,8 +8,9 @@ const display = document.querySelector('.display')
 //Global variables for calculator
 let calcInputs = [];
 let displayValue = "0"
-let keyInput = []
+let keyInput = 0
 let runningTotalArr = []
+let total = 0
 
 //Event Listners
 numberKeys.forEach((valueGetter) => valueGetter.addEventListener('click', numberCruncher));
@@ -31,57 +32,76 @@ function userDisplay(text){
     display.innerHTML = `"\n                <input type=\"text\" class=\"calculator-screen\" value=\"${text}\" disabled=\"\">\n            "`
 }
 
+
+// Function to globaly set all inputs
 function resetTallyInput(input){
     calcInputs = [`${input}`]
     displayValue = `${input}`
     keyInput = input
-}
+    total = 0
+    }
 
-//Main function for dealing with inputs
-function numberCruncher(e){
-
-    if(e.currentTarget.className === 'number'){
+//Function fo turn the clicks of kepad into a number, then pushses that numbver into the array
+function getAndJoinKeyInputs (e){
     console.log(`you clicked a ${e.currentTarget.className}`)
-
+    
     const calcInput = [
         e.currentTarget.value
     ]
     calcInputs.push(calcInput);
     displayValue = calcInputs.join('');
     userDisplay(displayValue);
-    keyInput = [parseInt(displayValue)];
+    keyInput = parseInt(displayValue);
     console.log(`the key input is ${keyInput}`);
-    }
+
+}
+
+//Main function for dealing with inputs
+function numberCruncher(e){
+
     
+    if(e.currentTarget.className === 'number'){
+        getAndJoinKeyInputs(e);
+    }
 
     if(e.currentTarget.className === 'all-clear'){
+        console.log('You Clicked All Clear')
         resetTallyInput(0)
         userDisplay(0);
-
-     }
-
-    if(e.currentTarget.className === 'operator'){
-        if (e.currentTarget.value === '+'){
-            console.log(keyInput)
-            console.log(`the running total is currently ${runningTotalArr}`)
-            runningTotalArr.push(keyInput)
-            
-            let total = runningTotalArr.reduce(tallyTotal, 0)
-            console.log(`the running total is currently ${total}`)
-
-            resetTallyInput(0);
-            userDisplay('+');
-                                 
-        }
-    if(e.currentTarget.className === '.equal-sign'){
-        runningTotalArr.push(keyInput);
-    }
+        runningTotalArr = []
         
     }
+    if(e.currentTarget.className === 'equal-sign'){
+            console.log('You Clicked =')
+            runningTotalArr.push(keyInput);
+            if (runningTotalArr.length = 1){
+                userDisplay(keyInput)
+            }
 
+        }
+    
+    if(e.currentTarget.className === 'operator'){
+        if (e.currentTarget.value === '+'){
 
+            if (runningTotalArr.length > 1){
+            }
+                if (runningTotalArr[1] = '+'){
+                    runningTotalArr.reduce(tallyTotal, runningTotalArr[0])
+                }
+
+            
+            
+            
+            resetTallyInput(0);
+            userDisplay(`${total}`);                                 
+        }
+        
+        
+    }
     
 
+    
+    }
 
- }
+
 
