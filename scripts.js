@@ -19,17 +19,17 @@ equalKey.forEach((valueGetter) => valueGetter.addEventListener('click', numberCr
 clearKey.forEach((valueGetter) => valueGetter.addEventListener('click', numberCruncher));
 
 //Addition accumulator 
-function tallyTotal(tally, currentTotal){
-    tally = parseInt(tally);
-    currentTotal = parseInt(currentTotal);
-    console.log(`the tally is ${tally}`)
-    console.log(`the current Total is is ${currentTotal}`)
-    return tally + currentTotal
-}
+// function tallyTotal(tally, currentTotal){
+//     tally = parseInt(tally);
+//     currentTotal = parseInt(currentTotal);
+//     console.log(`the tally is ${tally}`)
+//     console.log(`the current Total is is ${currentTotal}`)
+//     return tally + currentTotal
+// }
 
 // Function to change text in display of calc
 function userDisplay(text){
-    display.innerHTML = `"\n                <input type=\"text\" class=\"calculator-screen\" value=\"${text}\" disabled=\"\">\n            "`
+    display.innerHTML = `\n                <input type=\"text\" class=\"calculator-screen\" value=\"${text}\" disabled=\"\">\n            `
 }
 
 
@@ -38,7 +38,7 @@ function resetTallyInput(input){
     calcInputs = [`${input}`]
     displayValue = `${input}`
     keyInput = input
-    total = 0
+    userDisplay(input)
     }
 
 //Function fo turn the clicks of kepad into a number, then pushses that numbver into the array
@@ -56,14 +56,31 @@ function getAndJoinKeyInputs (e){
 
 }
 
+//Operator Function 
+function operatorHandler(operator){
+        if (runningTotalArr.length === 0){
+            runningTotalArr.push(keyInput)
+            runningTotalArr.push(`${operator}`)
+            
+        }
+        userDisplay(`${keyInput}`);                                 
+    }
+
+
+
+
 //Main function for dealing with inputs
 function numberCruncher(e){
 
     
+    
     if(e.currentTarget.className === 'number'){
         getAndJoinKeyInputs(e);
+        if (runningTotalArr[1] == true){
+            userDisplay()
+        }
     }
-
+    
     if(e.currentTarget.className === 'all-clear'){
         console.log('You Clicked All Clear')
         resetTallyInput(0)
@@ -72,28 +89,14 @@ function numberCruncher(e){
         
     }
     if(e.currentTarget.className === 'equal-sign'){
-            console.log('You Clicked =')
-            runningTotalArr.push(keyInput);
-            if (runningTotalArr.length = 1){
-                userDisplay(keyInput)
-            }
-
-        }
+        console.log('You Clicked =')
+        runningTotalArr.push(keyInput);
+        console.log(total);
+    }
     
     if(e.currentTarget.className === 'operator'){
-        if (e.currentTarget.value === '+'){
-
-            if (runningTotalArr.length > 1){
-            }
-                if (runningTotalArr[1] = '+'){
-                    runningTotalArr.reduce(tallyTotal, runningTotalArr[0])
-                }
-
-            
-            
-            
-            resetTallyInput(0);
-            userDisplay(`${total}`);                                 
+        console.log(e.currentTarget.value)
+        operatorHandler(e.currentTarget.value)                    
         }
         
         
@@ -101,7 +104,27 @@ function numberCruncher(e){
     
 
     
+    if (runningTotalArr.length === 3){
+        console.log(total)
+        if (runningTotalArr[1] === '+'){
+            total = runningTotalArr[0] + runningTotalArr[2];
+                    }
+        if (runningTotalArr[1] === '-'){
+            total = runningTotalArr[2] - runningTotalArr[1];
+        }
+        if (runningTotalArr[1] === '*'){
+            total = runningTotalArr[2] - runningTotalArr[0];
+        }
+        if (runningTotalArr[1] === '/'){
+            total =runningTotalArr[2] / runningTotalArr[0];
+        }
+
+        userDisplay(total)
+        resetTallyInput(total);
+        
     }
+    
+
 
 
 
