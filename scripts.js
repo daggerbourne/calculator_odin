@@ -124,7 +124,7 @@ function numberCruncher(e){
         runningTotalArr.splice(0,3,total)
                 }
     if (oppKey === '-'){
-        total = runningTotalArr[2] - runningTotalArr[1];
+        total = runningTotalArr[2] - runningTotalArr[0];
         runningTotalArr.splice(0,3,total)
     }
     if (oppKey === '*'){
