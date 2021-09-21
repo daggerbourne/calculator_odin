@@ -101,8 +101,7 @@ function numberCruncher(e){
     if(e.currentTarget.className === 'operator'){
         console.log(e.currentTarget.value)
         operatorHandler(e.currentTarget.value)                    
-        }
-        
+        }       
         
     }
     
