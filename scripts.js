@@ -46,7 +46,7 @@ function caryTotalOver(input){
     keyInput = input    
     }
 
-//Function fo turn the clicks of kepad into a number, then pushses that numbver into the array
+//Function fo turn the clicks of kepad into a number, then pushses that numbers into the array
 function getAndJoinKeyInputs (e){
         
     const calcInput = [
@@ -56,18 +56,18 @@ function getAndJoinKeyInputs (e){
     displayValue = calcInputs.join('');
     userDisplay(displayValue);
     keyInput = parseInt(displayValue);
-    
 }
 
 //Operator Function 
 function operatorHandler(operator){
-        if (runningTotalArr.length === 0){
-            runningTotalArr.push(keyInput)
-            resetTallyInput(0);
-            runningTotalArr.push(`${operator}`)
-            userDisplay(`${operator}`)            
-        }                                
-    }
+    if (runningTotalArr.length === 0){
+        runningTotalArr.push(keyInput)
+        resetTallyInput(0);
+        runningTotalArr.push(`${operator}`)
+        userDisplay(`${operator}`)            
+    }                                
+}
+
 
 
 
@@ -75,13 +75,15 @@ function operatorHandler(operator){
 //Main function for dealing with inputs
 function numberCruncher(e){    
     
+
     if(e.currentTarget.className === 'number'){
         getAndJoinKeyInputs(e);
+        
         if (runningTotalArr[1] == true){
             userDisplay()
         }
     }
-    
+   
     if(e.currentTarget.className === 'all-clear'){
         console.log('You Clicked All Clear')
         resetTallyInput(0)
@@ -97,12 +99,17 @@ function numberCruncher(e){
     }
     
     if(e.currentTarget.className === 'operator'){
+        if (runningTotalArr.length === 3){
+            totalMaker(runningTotalArr[1])
+        }
         if(runningTotalArr.length === 2){
-            runningTotalArr[2] = runningTotalArr [0];
+            console.log(`before push : ${runningTotalArr}`)
+            runningTotalArr.push(keyInput)                        
+            console.log(`after push : ${runningTotalArr}`)
             totalMaker(e.currentTarget.value)
         }
         if(runningTotalArr.length === 1){
-            runningTotalArr[1] = e.currentTarget.value
+            runningTotalArr.splice(1,1,e.currentTarget.value)
         }       
         operatorHandler(e.currentTarget.value)                    
         }
@@ -111,27 +118,26 @@ function numberCruncher(e){
     
 
     
-    if (runningTotalArr.length === 3){
-        console.log(total)
-       
-        
-    }
 
    function totalMaker(oppKey) {
-       
-    if (oppKey === '+'){
+           
+    if (runningTotalArr[1] === '+'){
         total = runningTotalArr[0] + runningTotalArr[2];
         runningTotalArr.splice(0,3,total)
                 }
-    if (oppKey === '-'){
-        total = runningTotalArr[2] - runningTotalArr[0];
+    if (runningTotalArr[1] === '-'){
+        console.log(`before - : ${runningTotalArr}`)
+        total = (runningTotalArr[2]) + (runningTotalArr[0]);
+        console.log(`the current toal is ${total}`)
         runningTotalArr.splice(0,3,total)
+        console.log(`after - : ${runningTotalArr}`)
+        console.log(`the total is ${total}`)
     }
-    if (oppKey === '*'){
+    if (runningTotalArr[1] === '*'){
         total = runningTotalArr[2] * runningTotalArr[0];
         runningTotalArr.splice(0,3,total)
     }
-    if (oppKey === '/'){
+    if (runningTotalArr[1] === '/'){
         total =runningTotalArr[2] / runningTotalArr[0];
         runningTotalArr.splice(0,3,total)
     }
@@ -139,3 +145,26 @@ console.log('its done!!')
     userDisplay(total)
     caryTotalOver(0);
 }
+
+
+
+
+
+
+
+
+
+//*********OBJ expiriements***************/
+// const totalMakerObj = {
+//     addOpp: function(){
+//         total = runningTotalArr[0] + runningTotalArr[2];
+//         runningTotalArr.splice(0,3,total)
+//         itsDone(total)
+//     },
+
+// } 
+
+// function itsDone(total){
+//         userDisplay(total)
+//     caryTotalOver(0);
+// }
