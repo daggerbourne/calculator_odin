@@ -126,6 +126,7 @@ function numberCruncher(e){
         runningTotalArr.splice(0,3,total)
                 }
     if (runningTotalArr[1] === '-'){
+        // debugger
         console.log(`before - : ${runningTotalArr}`)
         total = (runningTotalArr[2]) + (runningTotalArr[0]);
         console.log(`the current toal is ${total}`)
@@ -141,9 +142,10 @@ function numberCruncher(e){
         total =runningTotalArr[2] / runningTotalArr[0];
         runningTotalArr.splice(0,3,total)
     }
+
 console.log('its done!!')
     userDisplay(total)
-    caryTotalOver(0);
+    caryTotalOver('');
 }
 
 
@@ -154,16 +156,35 @@ console.log('its done!!')
 
 
 
-//*********OBJ expiriements***************/
-// const totalMakerObj = {
-//     addOpp: function(){
+// *********OBJ expiriements***************/
+// function numObjCruncher()
+// const oppKeyBank = {
+//     '+': function(){
 //         total = runningTotalArr[0] + runningTotalArr[2];
 //         runningTotalArr.splice(0,3,total)
 //         itsDone(total)
 //     },
-
+//     '-': function(){
+//         // debugger
+//         console.log(`before - : ${runningTotalArr}`)
+//         total = (runningTotalArr[2]) + (runningTotalArr[0]);
+//         console.log(`the current toal is ${total}`)
+//         runningTotalArr.splice(0,3,total)
+//         console.log(`after - : ${runningTotalArr}`)
+//         console.log(`the total is ${total}`)
+//      },
+//      '*': function(){
+//         total = runningTotalArr[2] * runningTotalArr[0];
+//         runningTotalArr.splice(0,3,total)
+//     },
+//     '/': function(){
+//         total =runningTotalArr[2] / runningTotalArr[0];
+//         runningTotalArr.splice(0,3,total)
+//     },
 // } 
 
+
+// // need to create a return function
 // function itsDone(total){
 //         userDisplay(total)
 //     caryTotalOver(0);
