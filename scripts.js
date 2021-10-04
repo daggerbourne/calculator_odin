@@ -124,28 +124,36 @@ function numberCruncher(e){
     if (runningTotalArr[1] === '+'){
         total = runningTotalArr[0] + runningTotalArr[2];
         runningTotalArr.splice(0,3,total)
+        userDisplay(total)
+        caryTotalOver('');
                 }
     if (runningTotalArr[1] === '-'){
         // debugger
         console.log(`before - : ${runningTotalArr}`)
-        total = (runningTotalArr[2]) + (runningTotalArr[0]);
         console.log(`the current toal is ${total}`)
-        runningTotalArr.splice(0,3,total)
+        total = runningTotalArr[2] - runningTotalArr[0];
+        console.log(`the current toal is ${-total}`)
+        runningTotalArr.splice(0,3,-total)
         console.log(`after - : ${runningTotalArr}`)
-        console.log(`the total is ${total}`)
+        console.log(`the total is ${-total}`)
+        userDisplay(-total)
+        caryTotalOver('');
     }
     if (runningTotalArr[1] === '*'){
         total = runningTotalArr[2] * runningTotalArr[0];
         runningTotalArr.splice(0,3,total)
+        userDisplay(total)
+        caryTotalOver('');
     }
     if (runningTotalArr[1] === '/'){
         total =runningTotalArr[2] / runningTotalArr[0];
         runningTotalArr.splice(0,3,total)
+        userDisplay(total)
+        caryTotalOver('');
     }
 
 console.log('its done!!')
-    userDisplay(total)
-    caryTotalOver('');
+   
 }
 
 
